@@ -8,6 +8,7 @@ A simple Python-based CLI tool that converts `.heic` image files into `.jpg` for
 - Auto-saves to a `converted_images/` folder
 - Runs directly in terminal
 - Clean and beginner-friendly Python code
+- Creates a copy of the converted image
 
 ## 🚀 Getting Started
 
