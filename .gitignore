@@ -1,0 +1,25 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Env files
+.env
+
+# Python virtual environments
+venv/
+.env/
+.venv/
+
+# Output images
+converted_images/
+example_images/
+
+# OS-generated
+Thumbs.db
