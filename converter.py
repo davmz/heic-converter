@@ -1,15 +1,16 @@
-# Import necessary modules
+# converter.py
+
 import time
 from utils import (
     get_input_file_path,
     create_output_folder,
-    convert_heic_to_jpg
+    process_path
 )
 
 def main():
-    print("\U0001F4F8 HEIC to JPG Converter\n")
+    print("📸 HEIC to JPG Converter\n")
 
-    # Step 1: Get valid input file path from user
+    # Step 1: Get valid input path from user (file or folder)
     input_path = get_input_file_path()
 
     # Start timing after input
@@ -18,21 +19,30 @@ def main():
     # Step 2: Create output folder if it doesn't exist
     output_folder = create_output_folder()
 
-    # Step 3: Convert the HEIC file to JPG
-    output_path, success = convert_heic_to_jpg(input_path, output_folder)
+    # Step 3: Process the input (file or folder)
+    total, converted, failed_files, converted_path = process_path(input_path, output_folder)
 
     # End timing after conversion
     end_time = time.time()
     total_time = end_time - start_time
 
     # Step 4: Display result
-    if success:
-        print(f"\n✅ Conversion successful!")
+    if total == 0:
+        print("\n⚠️ No valid .heic files to convert.")
+    elif total == 1 and not failed_files:
+        print(f"\n✅ Successfully converted:")
         print(f"Original file: {input_path}")
-        print(f"Converted file: {output_path}")
-        print(f"⏱️ Total time: {total_time:.2f} seconds")
+
+        if converted_path: # Only show if it's not None
+            print(f"Converted file: {converted_path}")
     else:
-        print(f"\n❌ Conversion failed. Please check the file and try again.")
+        print(f"\n✅ Converted {converted}/{total} file(s).")
+        if failed_files:
+            print("❌ Failed to convert the following file(s):")
+            for f in failed_files:
+                print(f"- {f}")
+
+    print(f"⏱️ Total time: {total_time:.2f} seconds")
 
 if __name__ == "__main__":
     main()
